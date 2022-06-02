@@ -27,11 +27,11 @@ const OrderForm = styled.form`
 const Order = () => {
   let navigate = useNavigate();
 
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const formProps = Object.fromEntries(formData);
-    let result = orderService(formProps);
+    let result = await orderService(formProps);
     if (result) {
       console.log("working");
       event.target.reset();

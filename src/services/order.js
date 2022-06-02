@@ -8,6 +8,7 @@ const orderService = async (data) => {
   }).catch((error) => {
     console.log(error);
     alert(error);
+    return;
   });
 
   if (response) {
