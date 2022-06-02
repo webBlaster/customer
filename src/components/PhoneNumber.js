@@ -1,9 +1,15 @@
 import { TextInput } from "grommet";
 import { Phone } from "grommet-icons";
 
-const PhoneNumber = ({ placeholder }) => {
+const PhoneNumber = ({ name, placeholder }) => {
   return (
-    <TextInput placeholder={placeholder} type="tel" icon={<Phone />} required />
+    <TextInput
+      name={name}
+      placeholder={placeholder}
+      type="tel"
+      icon={<Phone />}
+      required
+    />
   );
 };
 

@@ -1,9 +1,11 @@
 import { Box, Button, Heading, Select, TextArea, TextInput } from "grommet";
+import { useNavigate } from "react-router-dom";
 import { Mail } from "grommet-icons";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Address from "../components/Address";
 import PhoneNumber from "../components/PhoneNumber";
+
+import orderService from "../services/order";
 
 const Container = styled(Box)`
   background: #333333;
@@ -23,6 +25,19 @@ const OrderForm = styled.form`
 `;
 
 const Order = () => {
+  let navigate = useNavigate();
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const formProps = Object.fromEntries(formData);
+    let result = orderService(formProps);
+    if (result) {
+      console.log("working");
+      event.target.reset();
+      navigate("/confirmation");
+    }
+  };
   return (
     <Container align="center" pad="small">
       <Box pad="medium" background="white" align="center">
@@ -30,41 +45,61 @@ const Order = () => {
           Order Details
         </Heading>
 
-        <OrderForm>
+        <OrderForm onSubmit={handleFormSubmit}>
           <Heading level="3" color="#333333">
             Pickup Information
           </Heading>
-          <TextInput placeholder="Sender Full Name" required />
+          <TextInput
+            placeholder="Sender Full Name"
+            name="senderName"
+            required
+          />
           <TextInput
             placeholder="Sender Email"
             type="email"
             icon={<Mail />}
+            name="senderEmail"
             required
           />
-          <PhoneNumber placeholder="Sender Phone Number" />
-          <Address placeholder="Pickup Address" />
+          <PhoneNumber
+            name="senderPhoneNumber"
+            placeholder="Sender Phone Number"
+          />
+          <Address name="pickupAddress" placeholder="Pickup Address" />
 
           <Heading level="3" color="#333333">
             Dropoff Information
           </Heading>
 
-          <TextInput placeholder="Receiver Full Name" required />
           <TextInput
+            name="receiverName"
+            placeholder="Receiver Full Name"
+            required
+          />
+          <TextInput
+            name="receiverEmail"
             placeholder="Receiver Email"
             type="email"
             icon={<Mail />}
             required
           />
-          <PhoneNumber placeholder="Receiver Phone Number" />
-          <Address placeholder="Dropoff Address" />
+          <PhoneNumber
+            name="receiverPhoneNumber"
+            placeholder="Receiver Phone Number"
+          />
+          <Address name="dropoffAddress" placeholder="Dropoff Address" />
           <Select
+            name="size"
             placeholder="package size"
             options={["small", "medium", "large"]}
           />
-          <TextArea placeholder="Package Description" />
-          <Link to="/confirmation">
-            <Button fill primary color="#00873D" label="Place Order" />
-          </Link>
+          <TextArea
+            name="description"
+            placeholder="Package Description"
+            required
+          />
+
+          <Button primary type="submit" color="#00873D" label="Place Order" />
         </OrderForm>
       </Box>
     </Container>
