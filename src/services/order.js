@@ -6,7 +6,6 @@ const orderService = async (data) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   }).catch((error) => {
-    console.log(error);
     alert(error);
     return;
   });
