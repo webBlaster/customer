@@ -15,8 +15,7 @@ const Home = () => {
     <>
       <Container align="center" pad="medium">
         <Heading margin="5" textAlign="center" color="#ffffff">
-          The fastest delivery
-          <br /> service in Ikorodu, Lagos, Nigeria.
+          For your express delivery needs
         </Heading>
         <Link to="/order">
           <Button primary label="Request Pickup" color="#00873D" />
