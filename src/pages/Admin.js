@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { API_URL } from "../constants";
 import styled from "styled-components";
+import { getUserLocation } from "../services/geolocate";
+
 const Container = styled.div`
   iframe {
     width: 99%;
@@ -14,8 +16,14 @@ const Container = styled.div`
 
 const Admin = () => {
   let [geocode, setGeocode] = useState(null);
-  //let [origin, setOrigin] = useState(null);
+  let [origin, setOrigin] = useState(null);
   useEffect(() => {
+    //get userlocation
+    (async () => {
+      let coordinates = await getUserLocation();
+      setOrigin(coordinates);
+    })();
+
     //connect to geolocation stream
     const events = new EventSource(`${API_URL}/get-current-location`);
     events.onmessage = (event) => {
@@ -31,7 +39,7 @@ const Admin = () => {
           title="map"
           loading="lazy"
           allowFullScreen
-          src={`https://www.google.com/maps/embed/v1/directions?key=AIzaSyDxt_0pndC4mR72g4IGedAn9uSAHiJjemI&origin=${geocode?.lat}+${geocode?.lon}&zoom=18&destination=${geocode?.lat}+${geocode?.lon}`}
+          src={`https://www.google.com/maps/embed/v1/directions?key=AIzaSyDxt_0pndC4mR72g4IGedAn9uSAHiJjemI&origin=${origin?.lat}+${origin?.lon}&zoom=18&destination=${geocode?.lat}+${geocode?.lon}`}
         ></iframe>
       </Container>
     </>
