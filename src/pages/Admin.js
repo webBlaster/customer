@@ -39,7 +39,7 @@ const Admin = () => {
           title="map"
           loading="lazy"
           allowFullScreen
-          src={`https://www.google.com/maps/embed/v1/directions?key=AIzaSyDxt_0pndC4mR72g4IGedAn9uSAHiJjemI&origin=${origin?.lat}+${origin?.lon}&zoom=18&destination=${geocode?.lat}+${geocode?.lon}`}
+          src={`https://www.google.com/maps/embed/v1/directions?key=AIzaSyDxt_0pndC4mR72g4IGedAn9uSAHiJjemI&origin=${origin?.lat}+${origin?.lon}&destination=${geocode?.lat}+${geocode?.lon}`}
         ></iframe>
       </Container>
     </>
