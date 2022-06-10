@@ -11,7 +11,7 @@ const orderService = async (data) => {
   });
 
   if (response) {
-    const result = await response;
+    const result = await response.json();
     return result;
   }
 };

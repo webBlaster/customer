@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Order from "./pages/Order";
 import Confirm from "./pages/Confirm";
 import Admin from "./pages/Admin";
+import Tracker from "./pages/Tracker";
 
 // const theme = {
 //   global: {
@@ -45,8 +46,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/order" element={<Order />} />
-          <Route path="/confirmation" element={<Confirm />} />
+          <Route path="/confirmation/:id" element={<Confirm />} />
           <Route path="/west.admin" element={validIp ? <Admin /> : <Home />} />
+          <Route path="/track.order/:id" element={<Tracker />} />
         </Routes>
       </Router>
     </Grommet>

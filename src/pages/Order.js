@@ -33,9 +33,9 @@ const Order = () => {
     const formProps = Object.fromEntries(formData);
     let result = await orderService(formProps);
     if (result) {
-      console.log("working");
       event.target.reset();
-      navigate("/confirmation");
+      let id = result.data;
+      navigate(`/confirmation/${id}`);
     }
   };
   return (
